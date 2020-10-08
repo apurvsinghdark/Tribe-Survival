@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO.MemoryMappedFiles;
 using UnityEngine;
@@ -45,15 +46,14 @@ public class PlayerController : MonoBehaviour
         {
             velocity.y = -2f;
         }
-
+        
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(x, 0, z);
         //Vector3 movement = transform.forward * z * speed + (transform.right * x * 0.5f) + y; //FPS Movement
-        
-        anim.SetFloat("Speed", Mathf.Abs(x) + Mathf.Abs(z));
-        
+        anim.SetFloat("Speed", movement.magnitude);
+
         if (movement.magnitude >= 0.1f)
         {
             /*transform.rotation = Quaternion.Slerp( transform.rotation, Quaternion.LookRotation(movement), 0.15f);*/
