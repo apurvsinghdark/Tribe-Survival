@@ -11,11 +11,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float turnSmoothVelocity = 2;
     [SerializeField] float turnSmoothTime = 0.1f;
 
-    [SerializeField] Animator anim;
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundMask;
     [SerializeField] float groundDistance = 0.4f;
 
+    [SerializeField] Animator anim;
     [SerializeField] Transform cam;
     
     float gravity = -9.8f;
@@ -28,8 +28,8 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        anim = GetComponentInChildren<Animator>();
         characterController = gameObject.GetComponent<CharacterController>();
+        anim = GetComponentInChildren<Animator>();
         groundCheck = transform.GetChild(1);
     }
 
