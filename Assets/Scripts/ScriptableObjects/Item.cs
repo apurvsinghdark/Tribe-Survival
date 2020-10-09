@@ -1,17 +1,15 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/SpawnManagerScriptableObject", order = 1)]
-public class Item : ScriptableObject
-{
-    // Start is called before the first frame update
-    void Start()
+[CreateAssetMenu(fileName = "New Item", menuName = "Inventory/Item")]
+public class Item : ScriptableObject {
+
+    new public string name = "New Name";
+     public Sprite icon = null;
+ 
+    public virtual void Use()
     {
-        
+        Debug.Log("Using " + name);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public void RemoveFromInventory() => Inventory.instance.RemoveItem(this);
 }
