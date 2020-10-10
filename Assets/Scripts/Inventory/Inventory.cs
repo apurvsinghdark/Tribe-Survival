@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public static Inventory instance;
-
     #region  Singleton
+    public static Inventory instance;
     private void Awake() {
         if(instance == null)
         {
@@ -31,7 +30,9 @@ public class Inventory : MonoBehaviour
             return false;
         }
         items.Add(item);
-        onItemChangedCallBack.Invoke();
+        
+        if(onItemChangedCallBack != null)
+            onItemChangedCallBack.Invoke();
 
         return true;
     }
@@ -39,7 +40,9 @@ public class Inventory : MonoBehaviour
     public void RemoveItem(Item item)
     {
         items.Remove(item);
-        onItemChangedCallBack.Invoke();
+        
+        if(onItemChangedCallBack != null)
+            onItemChangedCallBack.Invoke();
     }
 
 }

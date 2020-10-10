@@ -10,6 +10,7 @@ public class Weapon : Item
     {
         base.Use();
 
+        EquipmentManager.instance.Equip(this);
         RemoveFromInventory();
     }
 }

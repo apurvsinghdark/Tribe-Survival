@@ -17,9 +17,9 @@ public class EquipmentManager : MonoBehaviour
         }
     }
     
-    [SerializeField] GameObject axe;
-    [SerializeField] GameObject sword;
-    [SerializeField] GameObject hammer;
+    public GameObject axe;
+    public GameObject sword;
+    public GameObject hammer;
     Weapon[] currentWeapon;
     Inventory inventory;
 
@@ -48,15 +48,21 @@ public class EquipmentManager : MonoBehaviour
         if(newWeapon != null && newWeapon.weapon == WeaponID.Axe)
         {
             axe.SetActive(true);
+            //In combate Animator Manager
         }
-        if(newWeapon != null && newWeapon.weapon == WeaponID.Sword)
+        //Add More weapons And Food Manager
+        /*if(newWeapon != null && newWeapon.weapon == WeaponID.Sword)
         {
+            axe.SetActive(false);
             sword.SetActive(true);
+            hammer.SetActive(false);
         }
         if(newWeapon != null && newWeapon.weapon == WeaponID.Hammer)
         {
+            axe.SetActive(false);
             hammer.SetActive(true);
-        }
+            sword.SetActive(false);
+        }*/
     }
 
     public Weapon Unequip(int slotIndex)
@@ -85,6 +91,11 @@ public class EquipmentManager : MonoBehaviour
 
     private void UnequipAll()
     {
+        for (int i = 0; i < currentWeapon.Length; i++)
+        {
+            Unequip(i);
+        }
+        
         axe.SetActive(false);
         sword.SetActive(false);
         hammer.SetActive(false);
