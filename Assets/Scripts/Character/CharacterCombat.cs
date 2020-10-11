@@ -20,6 +20,7 @@ public class CharacterCombat : MonoBehaviour
         
         attackCoolDown -= Time.deltaTime;
 
+        Attack();
         //if(Time.time - lastAttackTime > combatCoolDown)
         //    InCombat = false;
     }
@@ -28,7 +29,7 @@ public class CharacterCombat : MonoBehaviour
     {
         if (attackCoolDown <= 0f)
         {
-            if(Input.GetButtonDown("Fire1"))
+            if(Input.GetMouseButtonDown(0))
             {
                 if(OnAttack != null)
                     OnAttack();

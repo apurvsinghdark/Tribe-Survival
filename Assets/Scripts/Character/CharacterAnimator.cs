@@ -30,12 +30,12 @@ public class CharacterAnimator : MonoBehaviour
         combat = GetComponent<CharacterCombat>();
 
         currentAttackAnimSet = defaultAttackAnimSet;
-        //combat.OnAttack += OnAttack; //Add Attack Animation
+        combat.OnAttack += OnAttack; //Add Attack Animation
     }
 
     protected virtual void OnAttack()
     {
-        animator.SetTrigger("attack");
+        animator.SetTrigger("Attack");
         int attackIndex = Random.Range(0,currentAttackAnimSet.Length);
     }
 }
