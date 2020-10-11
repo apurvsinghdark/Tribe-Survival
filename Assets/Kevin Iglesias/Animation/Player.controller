@@ -250,7 +250,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: Combet
+  - m_Name: IsCombat
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -331,7 +331,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Combet
+    m_ConditionEvent: IsCombat
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8565579122908300589}
@@ -409,7 +409,7 @@ AnimatorStateMachine:
     m_Position: {x: 420, y: -140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8565579122908300589}
-    m_Position: {x: 280, y: 450, z: 0}
+    m_Position: {x: 500, y: 560, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -6508653748584031717}
@@ -419,7 +419,7 @@ AnimatorStateMachine:
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: -70, y: 160, z: 0}
-  m_ExitPosition: {x: 830, y: 20, z: 0}
+  m_ExitPosition: {x: 840, y: 40, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -8872705856650997989}
 --- !u!1101 &8957117737264874614
@@ -431,7 +431,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: Combet
+    m_ConditionEvent: IsCombat
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8872705856650997989}

@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float turnSmoothVelocity = 2;
     [SerializeField] float turnSmoothTime = 0.1f;
 
-    [SerializeField] Animator anim;
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundMask;
     [SerializeField] float groundDistance = 0.4f;
@@ -23,14 +22,16 @@ public class PlayerController : MonoBehaviour
 
     Vector3 y = Vector3.zero;
     CharacterController characterController;
+    CharacterAnimator characterAnimator;
 
     bool isGround;
 
     private void Start()
     {
-        anim = GetComponentInChildren<Animator>();
         characterController = gameObject.GetComponent<CharacterController>();
         groundCheck = transform.GetChild(1);
+
+        characterAnimator = CharacterAnimator.instance;
     }
 
     private void Update()
@@ -52,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 movement = new Vector3(x, 0, z);
         //Vector3 movement = transform.forward * z * speed + (transform.right * x * 0.5f) + y; //FPS Movement
-        anim.SetFloat("Speed", movement.magnitude);
+        characterAnimator.animator.SetFloat("Speed", movement.magnitude);
 
         if (movement.magnitude >= 0.1f)
         {
@@ -72,11 +73,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGround)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
-            anim.SetTrigger("Jump");
+            characterAnimator.animator.SetTrigger("Jump");
         }
         if (Input.GetKeyDown(KeyCode.V))
         {
-            anim.SetTrigger("Stopping");
+            characterAnimator.animator.SetTrigger("Stopping");
         }
     }
 }

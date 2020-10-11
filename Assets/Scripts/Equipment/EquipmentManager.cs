@@ -22,12 +22,14 @@ public class EquipmentManager : MonoBehaviour
     public GameObject hammer;
     Weapon[] currentWeapon;
     Inventory inventory;
+    CharacterAnimator characterAnimator;
 
     public delegate void OnEquipmentChanged(Weapon newWeapon, Weapon oldWeapon);
     public OnEquipmentChanged onEquipmentChanged;
 
     private void Start() {
         inventory = Inventory.instance;
+        characterAnimator = CharacterAnimator.instance;
 
         int numSlots = System.Enum.GetNames(typeof(WeaponID)).Length;
         currentWeapon = new Weapon[numSlots];
@@ -47,8 +49,11 @@ public class EquipmentManager : MonoBehaviour
 
         if(newWeapon != null && newWeapon.weapon == WeaponID.Axe)
         {
+            characterAnimator.animator.SetBool("IsCombat",true);
+
             axe.SetActive(true);
-            //In combate Animator Manager
+            //hammer.SetActive(false);
+            //sword.SetActive(false);
         }
         //Add More weapons And Food Manager
         /*if(newWeapon != null && newWeapon.weapon == WeaponID.Sword)
@@ -96,6 +101,7 @@ public class EquipmentManager : MonoBehaviour
             Unequip(i);
         }
         
+        characterAnimator.animator.SetBool("IsCombat",false);
         axe.SetActive(false);
         sword.SetActive(false);
         hammer.SetActive(false);
