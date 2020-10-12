@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// Random Animation Fix
 // Add Punch Animations
 // Fix Canvas Overlay
 

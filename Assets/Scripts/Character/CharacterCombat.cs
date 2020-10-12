@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CharacterCombat : MonoBehaviour
 {
-    public float attackSpeed = 2f;
+    public float attackDelay = 2f;
+    public float attackSpeed = 1f;
     private float attackCoolDown = 0f;
     private float lastAttackTime;
     private float combatCoolDown = 5f;
@@ -18,26 +19,28 @@ public class CharacterCombat : MonoBehaviour
 
     private void Update() {
         
-        attackCoolDown -= Time.deltaTime;
-
         Attack();
-        //if(Time.time - lastAttackTime > combatCoolDown)
-        //    InCombat = false;
+        
+        attackCoolDown -= Time.deltaTime;
     }
 
     public void Attack()
     {
-        if (attackCoolDown <= 0f)
+        if(Input.GetButtonDown("Fire1"))
         {
-            if(Input.GetMouseButtonDown(0))
-            {
-                if(OnAttack != null)
-                    OnAttack();
-
+            if (attackCoolDown <= 0f)
+            {  
+                StartCoroutine(AttackOn());
                 attackCoolDown = 1f/attackSpeed;
-                //InCombat = true;
-                lastAttackTime = Time.time;
             }
         }
+    }
+
+    IEnumerator AttackOn()
+    {
+        yield return new WaitForSeconds(attackDelay);
+        
+        if(OnAttack != null)
+            OnAttack();
     }
 }

@@ -8,7 +8,6 @@ using Random = UnityEngine.Random;
 public class CharacterAnimator : MonoBehaviour
 {
     public static CharacterAnimator instance;
-
     private void Awake() {
         if (instance != null)
         {
@@ -19,8 +18,11 @@ public class CharacterAnimator : MonoBehaviour
             instance = this;
         }
     }
+
+    public AnimationClip replaceableAnimation;
     public AnimationClip[] defaultAttackAnimSet;
     protected AnimationClip[] currentAttackAnimSet;
+    public AnimatorOverrideController overrideController;
 
     protected CharacterCombat combat;
     [NonSerialized] public Animator animator;
@@ -28,6 +30,12 @@ public class CharacterAnimator : MonoBehaviour
     protected virtual void Start() {
         animator = GetComponentInChildren<Animator>();
         combat = GetComponent<CharacterCombat>();
+
+        if (overrideController == null)
+        {
+            overrideController = new AnimatorOverrideController(animator.runtimeAnimatorController);
+        }
+        animator.runtimeAnimatorController = overrideController;
 
         currentAttackAnimSet = defaultAttackAnimSet;
         combat.OnAttack += OnAttack; //Add Attack Animation
@@ -37,5 +45,6 @@ public class CharacterAnimator : MonoBehaviour
     {
         animator.SetTrigger("Attack");
         int attackIndex = Random.Range(0,currentAttackAnimSet.Length);
+        overrideController[replaceableAnimation.name] = currentAttackAnimSet[attackIndex];
     }
 }
