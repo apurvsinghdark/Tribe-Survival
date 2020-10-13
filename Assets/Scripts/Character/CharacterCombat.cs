@@ -8,15 +8,9 @@ public class CharacterCombat : MonoBehaviour
     public float attackDelay = 2f;
     public float attackSpeed = 1f;
     private float attackCoolDown = 0f;
-    private float lastAttackTime;
-    private float combatCoolDown = 5f;
     public bool InCombat{get; private set;}
 
     public event System.Action OnAttack;
-
-    private void Start() {
-        InCombat = false;
-    }
 
     private void Update() {
         
