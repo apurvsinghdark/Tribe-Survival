@@ -2,11 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-// Add Punch Animations
-// Fix Canvas Overlay
-
-
 public class PlayerAnimator : CharacterAnimator
 { 
     public WeaponAnimation[] weaponAnimations;
@@ -32,23 +27,6 @@ public class PlayerAnimator : CharacterAnimator
                 currentAttackAnimSet = weaponAnimationDict[newItem];
             }
         }
-        if (newItem == null && oldItem != null && oldItem.weapon == WeaponID.Axe)
-        {
-            currentAttackAnimSet = defaultAttackAnimSet;
-        }
-        /*if (newItem != null && newItem.weapon == WeaponID.Sword)
-        {
-            if(weaponAnimationDict.ContainsKey(newItem))
-            {
-                currentAttackAnimSet = weaponAnimationDict[newItem];
-            }
-        }
-        if (newItem == null && oldItem != null && oldItem.weapon == WeaponID.Sword)
-        {
-            
-            currentAttackAnimSet = defaultAttackAnimSet;
-            
-        }
         if (newItem != null && newItem.weapon == WeaponID.Hammer)
         {
             if(weaponAnimationDict.ContainsKey(newItem))
@@ -56,12 +34,27 @@ public class PlayerAnimator : CharacterAnimator
                 currentAttackAnimSet = weaponAnimationDict[newItem];
             }
         }
-        if (newItem == null && oldItem != null && oldItem.weapon == WeaponID.Hammer)
+        if (newItem == null && oldItem != null)
         {
-            
             currentAttackAnimSet = defaultAttackAnimSet;
-            
-        }*/
+        }
+        // if (newItem != null && newItem.weapon == WeaponID.Sword)
+        // {
+            // if(weaponAnimationDict.ContainsKey(newItem))
+            // {
+                // currentAttackAnimSet = weaponAnimationDict[newItem];
+            // }
+        // }
+        // if (newItem == null && oldItem != null && oldItem.weapon == WeaponID.Sword)
+        // {
+            // 
+            // currentAttackAnimSet = defaultAttackAnimSet;
+            // 
+        // }
+        // if (newItem == null && oldItem != null && oldItem.weapon == WeaponID.Axe)
+        // {
+        //     currentAttackAnimSet = defaultAttackAnimSet;
+        // }
     }
 }
 

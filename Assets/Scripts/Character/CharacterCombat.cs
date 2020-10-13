@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class CharacterCombat : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class CharacterCombat : MonoBehaviour
 
     private void Update() {
         
+        if(EventSystem.current.IsPointerOverGameObject())
+            return;
+
         Attack();
         
         attackCoolDown -= Time.deltaTime;

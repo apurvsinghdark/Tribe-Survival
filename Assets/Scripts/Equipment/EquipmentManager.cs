@@ -20,6 +20,7 @@ public class EquipmentManager : MonoBehaviour
     public GameObject axe;
     public GameObject sword;
     public GameObject hammer;
+
     Weapon[] currentWeapon;
     Inventory inventory;
     CharacterAnimator characterAnimator;
@@ -38,7 +39,7 @@ public class EquipmentManager : MonoBehaviour
     public void Equip(Weapon newWeapon)
     {
         int slotIndex = (int)newWeapon.weapon;
-        Weapon oldWeapon = Unequip(slotIndex);
+        Weapon oldWeapon = Unequip(slotIndex, null);
 
         if(onEquipmentChanged != null)
         {
@@ -49,28 +50,36 @@ public class EquipmentManager : MonoBehaviour
 
         if(newWeapon != null && newWeapon.weapon == WeaponID.Axe)
         {
+            Unequip((int)WeaponID.Hammer, newWeapon);
+            //Unequip((int)WeaponID.Sword)
+            
             characterAnimator.animator.SetBool("IsCombat",true);
 
             axe.SetActive(true);
-            //hammer.SetActive(false);
+            hammer.SetActive(false);
             //sword.SetActive(false);
         }
         //Add More weapons And Food Manager
-        /*if(newWeapon != null && newWeapon.weapon == WeaponID.Sword)
-        {
-            axe.SetActive(false);
-            sword.SetActive(true);
-            hammer.SetActive(false);
-        }
+        // if(newWeapon != null && newWeapon.weapon == WeaponID.Sword)
+        // {
+            // axe.SetActive(false);
+            // sword.SetActive(true);
+            // hammer.SetActive(false);
+        // }
         if(newWeapon != null && newWeapon.weapon == WeaponID.Hammer)
         {
+            Unequip((int)WeaponID.Axe, newWeapon);
+            // Unequip((int)WeaponID.Sword);
+            
+            characterAnimator.animator.SetBool("IsCombat",true);
+
             axe.SetActive(false);
             hammer.SetActive(true);
-            sword.SetActive(false);
-        }*/
+            //sword.SetActive(false);
+        }
     }
 
-    public Weapon Unequip(int slotIndex)
+    public Weapon Unequip(int slotIndex, Weapon newWeapon)
     {
         if(currentWeapon[slotIndex] != null)
         {
@@ -81,7 +90,13 @@ public class EquipmentManager : MonoBehaviour
 
             if(onEquipmentChanged != null)
             {
-                onEquipmentChanged.Invoke(null,oldWeapon);
+                if (newWeapon != null)
+                {
+                    onEquipmentChanged.Invoke(newWeapon, oldWeapon);
+                }else
+                {
+                    onEquipmentChanged.Invoke(null, oldWeapon);
+                }
             }
 
             return oldWeapon;
@@ -98,9 +113,9 @@ public class EquipmentManager : MonoBehaviour
     {
         for (int i = 0; i < currentWeapon.Length; i++)
         {
-            Unequip(i);
+            Unequip(i,null);
         }
-        
+
         characterAnimator.animator.SetBool("IsCombat",false);
         axe.SetActive(false);
         sword.SetActive(false);
