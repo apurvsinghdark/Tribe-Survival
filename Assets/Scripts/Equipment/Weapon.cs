@@ -4,7 +4,7 @@
 public class Weapon : Item
 {
     public WeaponID weapon;
-    public int damage;
+    public int damageModifier;
 
     public override void Use()
     {

@@ -38,7 +38,7 @@ public class CharacterAnimator : MonoBehaviour
         animator.runtimeAnimatorController = overrideController;
 
         currentAttackAnimSet = defaultAttackAnimSet;
-        combat.OnAttack += OnAttack; //Add Attack Animation
+        combat.OnAttack += OnAttack;
     }
 
     protected virtual void OnAttack()
