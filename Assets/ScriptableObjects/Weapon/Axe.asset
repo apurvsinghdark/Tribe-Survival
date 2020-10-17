@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Axe
   icon: {fileID: 21300000, guid: 58158efe0b444454a9a3cc3f9d4392d5, type: 3}
   weapon: 0
-  damage: 20
+  damageModifier: 20

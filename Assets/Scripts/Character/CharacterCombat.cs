@@ -3,42 +3,62 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
+// Fix Damage modifier
+// Add Female Model
+// Add Nav Mesh
+// Food
+
+
 public class CharacterCombat : MonoBehaviour
 {
     public float attackDelay = 2f;
     public float attackSpeed = 1f;
     private float attackCoolDown = 0f;
+    [SerializeField] float rayDistance = 2f;
     public bool InCombat { get; private set; }
 
     public event System.Action OnAttack;
 
     CharacterStats myStats;
-    CharacterStats enemyStats;
+    CharacterStats target;
 
-    LayerMask layer;
+    [SerializeField] LayerMask layer;
 
     private void Start() {
         myStats = GetComponent<CharacterStats>();
-        enemyStats = FindObjectOfType<EnemyStats>();
     }
 
     private void Update() {
-        
+
         if(EventSystem.current.IsPointerOverGameObject())
             return;
 
-        Attack(enemyStats);
+        Attack();
         
         attackCoolDown -= Time.deltaTime;
+
+        RaycastHit hit;
+        bool ray = Physics.Raycast(transform.position + new Vector3(0,1,0), transform.forward , out hit, rayDistance, layer);
+        
+        if (ray)
+        {
+            EnemyStats enemyStats = hit.collider.GetComponent<EnemyStats>();
+
+            print(hit.transform.name);
+            target = enemyStats;
+        }
+        else{
+            return;
+        }
     }
 
-    public void Attack(CharacterStats targetStats)
+    public void Attack()
     {
         if(Input.GetButtonDown("Fire1"))
         {
             if (attackCoolDown <= 0f)
             {
-                enemyStats = targetStats;
                 StartCoroutine(AttackOn());
                 attackCoolDown = 1f/attackSpeed;
             }
@@ -55,14 +75,14 @@ public class CharacterCombat : MonoBehaviour
 
     public void AttackHit_AnimationEvent()
     {
-        RaycastHit hit;
-        Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 10f, layer);
-        //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.red);
-
-        enemyStats.TakeDamage(myStats.damage.GetValue());
+        if(target != null)
+            target.TakeDamage(myStats.damage.GetValue());
+        else
+            return;
     }
     private void OnDrawGizmos()
     {
-        Gizmos.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000);
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position + new Vector3(0,1,0), transform.forward * rayDistance);
     }
 }

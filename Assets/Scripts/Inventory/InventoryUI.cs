@@ -13,13 +13,22 @@ public class InventoryUI : MonoBehaviour
         inventory = Inventory.instance;
         inventory.onItemChangedCallBack += UpdateUI;
 
+        Cursor.visible = false;
         slots = itemParent.GetComponentsInChildren<InventorySlot>();
     }
     private void Update() {
         if(Input.GetButtonDown("Inventory")) 
         {
             inventoryUI.SetActive(!inventoryUI.activeSelf);
-        }   
+        }
+
+        if (inventoryUI.activeSelf)
+        {
+            Cursor.visible = true;
+        }
+        else{
+            Cursor.visible = false;
+        }
     }
 
     public void UpdateUI()
