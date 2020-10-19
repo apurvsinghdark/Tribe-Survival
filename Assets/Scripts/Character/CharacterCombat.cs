@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-// Fix Damage modifier
 // Add Female Model
 // Add Nav Mesh
 // Food

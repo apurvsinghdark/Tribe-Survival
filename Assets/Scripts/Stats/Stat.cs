@@ -13,7 +13,7 @@ public class Stat
     public int GetValue()
     {
         int finalValue = baseValue;
-        modifiers.ForEach(x => finalValue += x);
+        modifiers.ForEach(x => finalValue = x);
         return finalValue;
     }
 
@@ -25,7 +25,9 @@ public class Stat
 
     public void RemoveModifier(int modifier)
     {
-        if(modifier != 0)
+        if(modifier != 0){
             modifiers.Remove(modifier);
+        }
+
     }
 }
