@@ -29,6 +29,7 @@ public class CharacterAnimator : MonoBehaviour
 
     protected virtual void Start() {
         animator = GetComponentInChildren<Animator>();
+        // if(this.gameObject == )
         combat = GetComponent<CharacterCombat>();
 
         if (overrideController == null)

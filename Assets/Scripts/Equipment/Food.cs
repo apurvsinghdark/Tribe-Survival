@@ -10,8 +10,9 @@ public class Food : Item
     {
         base.Use();
 
+        FoodManager.instance.OnHeal(this);        
         RemoveFromInventory();
     }
 }
 
-public enum FoodItem{ chicken, apple, sugar }
+public enum FoodItem{ melon, apple, banana }

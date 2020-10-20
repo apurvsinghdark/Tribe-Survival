@@ -29,6 +29,21 @@ public class CharacterStats : MonoBehaviour
         if(CurrentHealth <= 0)
             Die();           
     }
+    public void TakeHeal(int heal)
+    {
+        heal = Mathf.Clamp(heal, 0, int.MaxValue);
+
+        CurrentHealth += heal;
+
+        if (this != null)
+            Debug.Log(transform.name + " Takes " + heal + " heal. ");
+        
+        if(OnHealthChanged != null)
+            OnHealthChanged(maxHealth, CurrentHealth);
+        
+        if(CurrentHealth >= maxHealth)
+            CurrentHealth = maxHealth;        
+    }
 
     public virtual void Die()
     {

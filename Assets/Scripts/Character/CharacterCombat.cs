@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-
-// Add Female Model
 // Add Nav Mesh
-// Food
 
-
+[RequireComponent(typeof(CharacterStats))]
 public class CharacterCombat : MonoBehaviour
 {
     public float attackDelay = 2f;
@@ -52,7 +49,7 @@ public class CharacterCombat : MonoBehaviour
         }
     }
 
-    public void Attack()
+    private void Attack()
     {
         if(Input.GetButtonDown("Fire1"))
         {
