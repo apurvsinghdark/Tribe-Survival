@@ -16,6 +16,7 @@ public class HealthUI : MonoBehaviour
 
    private void Start() {
        cam = Camera.main.transform;
+       target = transform.Find("HealthUI");
 
        foreach(Canvas c in FindObjectsOfType<Canvas>())
        {
